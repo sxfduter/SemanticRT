@@ -201,6 +201,15 @@ def load_ckpt(logdir, model, prefix=''):
     model.load_state_dict(torch.load(save_pth,map_location='cuda:0'))
     return model
 
+def save_model(logdir, model, optimizer, epoch, prefix=''):
+    state = model.module.state_dict() if hasattr(model, 'module') else model.state_dict()
+    torch.save({
+        'epoch': epoch,
+        'lr':  optimizer.param_groups[0]['lr'],
+        'model_state_dict': state,
+        'optimizer_state_dict': optimizer.state_dict(),
+     }, os.path.join(logdir, prefix+'model.pth'))
+
 
 def compute_speed(model, input_size, device=0, iteration=100):
     torch.cuda.set_device(device)

@@ -4,7 +4,7 @@
     "inputs": "rgbt",
 
     "dataset": "irseg",
-    "root": "/set_your_data_path/MFNet_dataset/",
+    "root": "/data/public_dataset/MFNet_dataset",
     "n_classes": 9,
     "id_unlabel": -1,
     "brightness": 0.5,
@@ -27,6 +27,7 @@
     "epochs": 500,
 
     "loss": "crossentropy",
-    "class_weight": "enet"
+    "class_weight": "enet",
+    "subset": "train_1_8_semi"
 }
 

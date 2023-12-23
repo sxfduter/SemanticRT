@@ -14,7 +14,7 @@ class IRSeg(data.Dataset):
 
     def __init__(self, cfg, mode='trainval', do_aug=True):
 
-        assert mode in ['train', 'val', 'trainval', 'test', 'test_day', 'test_night'], f'{mode} not support.'
+        assert mode in ['train', 'val', 'trainval', 'test', 'test_day', 'test_night', 'train_1_2_semi', 'train_1_4_semi', 'train_1_8_semi', 'train_1_16_semi'], f'{mode} not support.'
         self.mode = mode
 
         ## pre-processing
@@ -59,8 +59,12 @@ class IRSeg(data.Dataset):
         else:
             raise (f"{cfg['class_weight']} not support.")
 
-        with open(os.path.join(self.root, f'{mode}.txt'), 'r') as f:
-            self.infos = f.readlines()
+        if mode=="train" and cfg["subset"] is not None:
+            with open(os.path.join(self.root, f'{cfg["subset"]}.txt'), 'r') as f:
+                self.infos = f.readlines()
+        else:
+            with open(os.path.join(self.root, f'{mode}.txt'), 'r') as f:
+                self.infos = f.readlines()
 
     def __len__(self):
         return len(self.infos)

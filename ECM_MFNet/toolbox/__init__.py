@@ -4,7 +4,7 @@ from .log import get_logger
 #import torch_optimizer as optim
 #from optim import Ranger
 from .utils import ClassWeight, save_ckpt, load_ckpt, class_to_RGB, \
-    compute_speed, setup_seed, group_weight_decay
+    compute_speed, setup_seed, group_weight_decay, save_model
 
 
 def get_dataset(cfg):
